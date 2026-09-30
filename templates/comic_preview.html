@@ -1,0 +1,151 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <title>
+        {{ comic.title }}
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+<main class="container">
+
+    <header class="topbar">
+
+        <div>
+
+            <p class="eyebrow">
+                YOUR GENERATED COMIC
+            </p>
+
+            <h1>
+                {{ comic.title }}
+            </h1>
+
+        </div>
+
+
+        <a
+            class="button secondary"
+            href="/"
+        >
+            New Comic
+        </a>
+
+    </header>
+
+
+    <section class="comic-grid">
+
+        {% for panel in comic.panels %}
+
+        <article class="panel card">
+
+            <h2>
+                Panel {{ panel.panel_number }}:
+                {{ panel.title }}
+            </h2>
+
+
+            <img
+                src="{{ panel.image_url }}"
+                alt="Comic illustration for panel {{ panel.panel_number }}"
+            >
+
+
+            <p class="scene">
+
+                <em>
+                    {{ panel.scene_description }}
+                </em>
+
+            </p>
+
+
+            <p>
+
+                <strong>
+                    Caption:
+                </strong>
+
+                {{ panel.caption }}
+
+            </p>
+
+
+            <p>
+                {{ panel.narration }}
+            </p>
+
+
+            {% if panel.dialogue %}
+
+            <blockquote>
+
+                {{ panel.dialogue }}
+
+            </blockquote>
+
+            {% endif %}
+
+
+        </article>
+
+        {% endfor %}
+
+    </section>
+
+
+    <section class="card export-card">
+
+        <h2>
+            Ready to export?
+        </h2>
+
+        <p>
+            Your comic is compiled into a
+            multi-page PDF with each panel
+            and its story text.
+        </p>
+
+
+        <a
+            class="button"
+            href="{{ comic.pdf_url }}"
+            download
+        >
+            Download Your Comic as PDF
+        </a>
+
+
+        <a
+            class="text-link"
+            href="/export-success?pdf={{ comic.pdf_url | urlencode }}"
+        >
+            Open export confirmation
+        </a>
+
+    </section>
+
+</main>
+
+</body>
+
+</html>

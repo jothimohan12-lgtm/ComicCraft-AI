@@ -1,0 +1,194 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <title>ComicCraft</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/style.css"
+    >
+
+</head>
+
+<body>
+
+<main class="container hero">
+
+    <section class="card intro">
+
+        <p class="eyebrow">
+            AI COMIC STORY CREATOR
+        </p>
+
+        <h1>
+            Turn an idea into a comic.
+        </h1>
+
+        <p>
+            Describe your story, choose its mood
+            and art direction, and ComicCraft
+            builds a five-panel story with
+            illustrations and a PDF export.
+        </p>
+
+    </section>
+
+
+    {% if error %}
+
+    <div class="alert">
+        {{ error }}
+    </div>
+
+    {% endif %}
+
+
+    <form
+        class="card form"
+        action="/generate"
+        method="post"
+    >
+
+        <label>
+
+            Story Prompt
+
+            <textarea
+                name="story_prompt"
+                required
+                maxlength="2000"
+                placeholder="A brave fox explores an enchanted forest..."
+            ></textarea>
+
+        </label>
+
+
+        <div class="grid two">
+
+            <label>
+
+                Main Character
+
+                <input
+                    name="character_name"
+                    required
+                    maxlength="80"
+                    placeholder="Milo"
+                >
+
+            </label>
+
+
+            <label>
+
+                Setting
+
+                <input
+                    name="setting"
+                    required
+                    maxlength="120"
+                    placeholder="Enchanted forest"
+                >
+
+            </label>
+
+        </div>
+
+
+        <div class="grid two">
+
+            <label>
+
+                Story Tone
+
+                <select name="tone">
+
+                    <option>
+                        light-hearted
+                    </option>
+
+                    <option>
+                        dramatic
+                    </option>
+
+                    <option>
+                        poetic
+                    </option>
+
+                    <option>
+                        funny
+                    </option>
+
+                </select>
+
+            </label>
+
+
+            <label>
+
+                Art Style
+
+                <select name="art_style">
+
+                    <option>
+                        comic book
+                    </option>
+
+                    <option>
+                        anime
+                    </option>
+
+                    <option>
+                        pixel art
+                    </option>
+
+                    <option>
+                        realistic
+                    </option>
+
+                </select>
+
+            </label>
+
+        </div>
+
+
+        <button
+            class="button"
+            type="submit"
+        >
+            Create My Comic
+        </button>
+
+
+        <p class="hint">
+
+            Story generation requires
+            <code>GEMINI_API_KEY</code>.
+
+            Image generation can use Hugging Face,
+            local Diffusers, or the built-in
+            preview fallback.
+
+        </p>
+
+    </form>
+
+</main>
+
+
+<script src="/static/js/app.js"></script>
+
+</body>
+
+</html>
